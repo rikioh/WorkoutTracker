@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Workout, Exercise } = require("../models/");
 
-//get workout.
+//get all workouts.
 router.get("/api/workouts", async (req, res) =>
 {
     try
@@ -57,6 +57,22 @@ router.post("/api/workouts", async (req, res) =>
     }
 });
 
+router.get("/api/workouts/range", async (req, res) =>
+{
+    try
+    {
+        const workouts = await Workout.find({}).limit(7);
+
+        if (workouts)
+            res.json(workouts);
+        else
+            res.json({ message: "No workouts found within range." });
+    }
+    catch (err)
+    {
+        res.status(500).json(err);
+    }
+});
 
 //Export router.
 module.exports = router;

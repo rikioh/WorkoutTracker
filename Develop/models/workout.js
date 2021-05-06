@@ -15,16 +15,12 @@ const exerciseSchema = new Schema(
     
 
 const workoutSchema = new Schema({
-  name: {
-    type: String,
-    trim: true,
-    required: "Enter a name for Workout"
+  day:
+  {
+      type: Date,
+      unique: true
   },
-  exercises: [exerciseSchema],
-  date: {
-    type: Date,
-    default: Date.now
-  },
+  exercises: [exerciseSchema]
 });
 
 const Exercise = mongoose.model("Exercise", exerciseSchema);
